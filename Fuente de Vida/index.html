@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iglesia Cristiana - Fuente de Vida</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!-- ===== LIGHTBOX PARA IMÁGENES ===== -->
+<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:5000; justify-content:center; align-items:center; cursor:zoom-out;" onclick="cerrarLightbox()">
+    <button onclick="cerrarLightbox()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:white; font-size:3rem; cursor:pointer; z-index:5001;">&times;</button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada" style="max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 0 30px rgba(0,0,0,0.5);">
+</div>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="contenedor">
+            <div class="logo">
+                <img src="logo.jpg" alt="Logo de la Iglesia"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div>
+                    <div class="nombre-iglesia">Fuente de Vida San Ramon</div>
+                    <div class="lema">Iglesia Cristiana</div>
+                </div>
+            </div>
+
+            <button class="btn-hamburguesa" id="btn-hamburguesa" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#inicio" class="activo">Inicio</a></li>
+                <li><a href="#ministerios">Ministerios</a></li>
+                <li><a href="#versiculos">Versículos</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#" id="btn-admin" onclick="abrirLogin()">Login</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="contenedor">
+            <div class="hero-texto">
+                <span class="bienvenida">Bienvenidos a nuestra iglesia</span>
+                <h1>Un lugar de <span>fe, amor</span> y esperanza</h1>
+                <p class="versiculo">"Porque donde están dos o tres reunidos en mi nombre, allí estoy yo en medio de
+                    ellos." — Mateo 18:20</p>
+                <div class="botones-hero">
+                    <a href="#ministerios" class="btn btn-primario"><i class="fas fa-heart"></i> Conócenos</a>
+                    <a href="#eventos" class="btn btn-secundario"><i class="fas fa-calendar"></i> Próximos eventos</a>
+                </div>
+            </div>
+            <div class="hero-imagen">
+                <div class="circulo"><span> <img src="logo.jpg" alt="logo" style="border-radius: 50%;"></span></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ===== REFLEXIONES / VERSÍCULOS ===== -->
+    <!-- ===== VERSÍCULOS ===== -->
+    <section class="seccion seccion-alterna" id="versiculos">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Versículos</span>
+                <h2>Palabra de Dios</h2>
+                <p>Versículos que edifican y fortalecen tu fe</p>
+            </div>
+            <div class="versiculos-grid">
+                <div class="tarjeta-versiculo animar animar-retraso-1">
+                    <i class="fas fa-dove"></i>
+                    <p class="texto-versiculo">"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito,
+                        para que todo aquel que en él cree no se pierda, mas tenga vida eterna."</p>
+                    <span class="referencia">— Juan 3:16</span>
+                </div>
+                <div class="tarjeta-versiculo animar animar-retraso-2">
+                    <i class="fas fa-shield-alt"></i>
+                    <p class="texto-versiculo">"Todo lo puedo en Cristo que me fortalece."</p>
+                    <span class="referencia">— Filipenses 4:13</span>
+                </div>
+                <div class="tarjeta-versiculo animar animar-retraso-3">
+                    <i class="fas fa-heart"></i>
+                    <p class="texto-versiculo">"El Señor es mi pastor; nada me faltará."</p>
+                    <span class="referencia">— Salmo 23:1</span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+    <!-- ===== EVENTOS ===== -->
+    <section class="seccion" id="eventos">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Eventos</span>
+                <h2>Próximas actividades</h2>
+                <p>Únete a nuestras celebraciones y actividades comunitarias</p>
+            </div>
+            <!-- Contenedor donde se cargarán los eventos desde Supabase -->
+            <div class="eventos-lista" id="eventos-lista"></div>
+        </div>
+    </section>
+
+    <!-- ===== GALERÍA ===== -->
+    <section class="seccion seccion-alterna" id="galeria">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Galería</span>
+                <h2>Nuestros momentos</h2>
+                <p>Fotos de nuestras actividades y celebraciones</p>
+            </div>
+            <!-- Contenedor de fotos -->
+            <div class="galeria-grid" id="galeria"></div>
+        </div>
+    </section>
+
+    <!-- ===== BIBLIA EN LÍNEA ===== -->
+    <section class="seccion" id="biblia">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Recursos</span>
+                <h2>Biblia en línea</h2>
+                <p>Lee y estudia la Palabra de Dios gratis, sin registro</p>
+            </div>
+            <div class="biblia-grid">
+                <a href="https://www.biblegateway.com/versions/Reina-Valera-1960-RVR1960/" target="_blank"
+                    rel="noopener" class="tarjeta-biblia animar animar-retraso-1">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Bible Gateway</h3>
+                    <p>RVR1960, NVI y más versiones</p>
+                </a>
+                <a href="https://www.bibliatodo.com/" target="_blank" rel="noopener"
+                    class="tarjeta-biblia animar animar-retraso-2">
+                    <i class="fas fa-bible"></i>
+                    <h3>Biblia Todo</h3>
+                    <p>Concordancias y comentarios</p>
+                </a>
+                <a href="https://biblehub.com/" target="_blank" rel="noopener"
+                    class="tarjeta-biblia animar animar-retraso-3">
+                    <i class="fas fa-language"></i>
+                    <h3>Bible Hub</h3>
+                    <p>Interlineal y herramientas de estudio</p>
+                </a>
+                <a href="https://www.bible.com/es" target="_blank" rel="noopener"
+                    class="tarjeta-biblia animar animar-retraso-1">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Bible.com</h3>
+                    <p>Acceso web y móvil</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <!-- ===== MINISTERIOS ===== -->
+    <!-- ===== MINISTERIOS ===== -->
+    <section class="seccion" id="ministerios">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Nuestros Ministerios</span>
+                <h2>Áreas de servicio</h2>
+                <p>Conoce cada ministerio y encuentra su ubicación</p>
+            </div>
+            <div class="ministerios-grid">
+
+                <!-- Tarjeta 1 -->
+                <a href="https://maps.app.goo.gl/RC2SkDB2Ckn65oy89" target="_blank" rel="noopener"
+                    class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida</h3>
+                    <p style="text-align: justify;">Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia
+                        prudencia. Reconócelo en todos tus caminos, y él enderezará tus veredas.</p>
+                    <br>
+                    <p style="text-align: left;"> Proverbios 3:5-6</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 2 -->
+                <a href="https://maps.app.goo.gl/FsozzLryRvQaMp7UA" target="_blank" rel="noopener"
+                    class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida San Ramon</h3>
+                    <p style="text-align: justify;">Jehová te bendiga, y te guarde;
+                        Jehová haga resplandecer su rostro sobre ti, y tenga de ti misericordia;
+                        Jehová alce sobre ti su rostro, y ponga en ti paz.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> Números 6:24</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 3 -->
+                <a href="https://maps.app.goo.gl/prhiH2Xoqnp9acnS6" target="_blank" rel="noopener"
+                    class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida Sur</h3>
+                    <p style="text-align: justify;">No temas, porque yo estoy contigo; no desmayes, porque yo soy tu
+                        Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> Isaías 41:10</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 4 -->
+                <a href="https://maps.app.goo.gl/dacrbi6KEnfPzUjP7" target="_blank" rel="noopener"
+                    class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida la Hacienda</h3>
+                    <p style="text-align: justify;">Porque yo sé los pensamientos que tengo acerca de vosotros, dice
+                        Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> Jeremías 29:11</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 5 -->
+                <a href="" target="_blank" rel="noopener" class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida chautzingo</h3>
+                    <p style="text-align: justify;">Jehová es mi fortaleza y mi escudo; en él confió mi corazón, y fui
+                        ayudado; por lo que se gozó mi corazón, y con mi cántico le alabaré.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> Salmo 18:2</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 6 -->
+                <a href="https://maps.app.goo.gl/CK4MUcxMVskU7P8w8" target="_blank" rel="noopener"
+                    class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida Coyula</h3>
+                    <p style="text-align: justify;">Y la paz de Dios, que sobrepasa todo entendimiento, guardará
+                        vuestros corazones y vuestros pensamientos en Cristo Jesús.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> Filipenses 4:7</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+                <!-- Tarjeta 7 -->
+                <a href="" target="_blank" rel="noopener" class="tarjeta-ministerio animar animar-retraso-1">
+                    <div class="icono"><i class="fas fa-church"></i></div>
+                    <h3>Fuente de Vida Cholula</h3>
+                    <p style="text-align: justify;">La gracia del Señor Jesucristo, el amor de Dios, y la comunión del
+                        Espíritu Santo sean con todos vosotros. Amén.
+                    </p>
+                    <br>
+                    <p style="text-align: left;"> 2 Corintios 13:14</p>
+                    <div class="mas-info">Ver ubicación</div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ===== CONTACTO ===== -->
+    <section class="seccion" id="contacto">
+        <div class="contenedor">
+            <div class="encabezado-seccion animar">
+                <span class="etiqueta">Contacto</span>
+                <h2>Estamos aquí para ti</h2>
+                <p>¿Tienes preguntas? Escríbenos, queremos conocerte</p>
+            </div>
+            <div class="contacto-grid">
+                <div class="info-contacto animar animar-retraso-1">
+                    <div class="item">
+                        <div class="icono-contacto"><i class="fas fa-location-dot"></i></div>
+                        <div>
+                            <h4>Dirección Fuente de Vida San Ramon </h4>
+                            <p>C. 11-A Sur 14705-local 103, San Bernabé Temoxtitla, 72498 Heroica Puebla de Zaragoza,
+                                Pue.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icono-contacto"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Teléfono Pastor Eduardo</h4>
+                            <p>+52 1 221 591 8170 </p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icono-contacto"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contacto@fuentedevida.org</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icono-contacto"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Horarios</h4>
+                            <p>Domingos: 3:00 pm <br>Miércoles: 6:00 pm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="formulario-contacto animar animar-retraso-2">
+                    <h3>Envíanos un mensaje</h3>
+                    <form id="formulario-contacto" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="d060256d-a78e-469a-860d-c63a1e008c93">
+                        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+                        <div class="campo"><label for="nombre">Nombre completo</label><input type="text" id="nombre"
+                                name="nombre" required placeholder="Tu nombre"></div>
+                        <div class="campo"><label for="email">Correo electrónico</label><input type="email" id="email"
+                                name="email" required placeholder="tu@email.com"></div>
+                        <div class="campo"><label for="asunto">Asunto</label><input type="text" id="asunto"
+                                name="asunto" required placeholder="¿En qué podemos ayudarte?"></div>
+                        <div class="campo"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje"
+                                required placeholder="Escribe tu mensaje aquí..."></textarea></div>
+                        <button type="submit" class="btn">Enviar mensaje <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Fuente de Vida</h4>
+                    <p>Una iglesia cristiana comprometida con la Palabra de Dios y el amor al prójimo.</p>
+                    <p>"Edificando vidas, transformando corazones."</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces rápidos</h4>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#ministerios">Ministerios</a>
+                    <a href="#versiculos">Versículos</a>
+                    <a href="#eventos">Eventos</a>
+                    <a href="#galeria">Galería</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Horarios</h4>
+                    <p>Domingos: 10:00 AM y 6:00 PM</p>
+                    <p>Miércoles: 7:00 PM</p>
+
+                </div>
+                <div class="footer-col">
+                    <h4>Síguenos</h4>
+                    <p>Conecta con nosotros en redes sociales</p>
+                    <div class="redes-sociales">
+                        <a href="https://www.facebook.com/share/1CDMKsmbv4/" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/fuentedevidasanramon28?utm_source=qr&igsh=MWN4OWJzNWxjMXJ6Yw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@fuente.de.vida.sa?_r=1&_t=ZS-98yGZ9u8fdU" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="anio-actual"></span> Fuente de Vida - Iglesia Cristiana. Todos los derechos
+                    reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL DE LOGIN ===== -->
+    <div id="modal-login"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:2000; justify-content:center; align-items:center;">
+        <div
+            style="background:white; padding:30px; border-radius:16px; width:90%; max-width:400px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+            <h3 style="margin-bottom:20px; color:#7e0000;">Acceso administrador</h3>
+            <input type="email" id="login-email" placeholder="Correo"
+                style="width:100%; margin:10px 0; padding:12px; border-radius:8px; border:1px solid #ccc;">
+            <input type="password" id="login-password" placeholder="Contraseña"
+                style="width:100%; margin:10px 0; padding:12px; border-radius:8px; border:1px solid #ccc;">
+            <button onclick="loginAdmin()" class="btn"
+                style="width:100%; background:#7e0000; color:white; border:none;">Entrar</button>
+            <button onclick="cerrarLogin()"
+                style="margin-top:10px; background:none; border:none; color:#7e0000; cursor:pointer;">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- ===== PANEL DE ADMINISTRACIÓN ===== -->
+    <!-- ===== PANEL DE ADMINISTRACIÓN ===== -->
+<div id="panel-admin" style="display:none; position:fixed; top:0; right:0; width:100%; max-width:700px; height:100%; background:#f9f7f2; z-index:3000; overflow-y:auto; box-shadow:-5px 0 30px rgba(0,0,0,0.2); font-family:'Montserrat', sans-serif;">
+    <div style="background:#7e0000; color:white; padding:20px 25px; display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; color:white; font-family:'Playfair Display', serif;">Panel de Administración</h3>
+        <button onclick="cerrarPanel()" style="background:none; border:none; color:white; font-size:2.2rem; cursor:pointer;">&times;</button>
+    </div>
+    <div style="padding:25px;">
+        <p id="usuario-actual" style="color:#666; margin-bottom:15px;"></p>
+        <button onclick="logout()" style="background:#c9af1e; color:#7e0000; border:none; padding:10px 20px; border-radius:30px; cursor:pointer; font-weight:600; margin-bottom:25px;">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </button>
+
+        <!-- Formulario de evento -->
+        <div style="background:white; border-radius:16px; padding:25px; box-shadow:0 4px 15px rgba(0,0,0,0.05); margin-bottom:30px;">
+            <h4 id="formulario-titulo" style="margin-bottom:20px; color:#7e0000; font-size:1.3rem;">➕ Nuevo evento</h4>
+            <input type="hidden" id="evento-id" value="">
+            <div class="campo-admin">
+                <label for="evento-titulo">Título del evento *</label>
+                <input type="text" id="evento-titulo" placeholder="Ej: Conferencia de Jóvenes" required>
+            </div>
+            <div class="campo-admin">
+                <label for="evento-descripcion">Descripción</label>
+                <textarea id="evento-descripcion" placeholder="Describe brevemente el evento..." rows="3"></textarea>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                <div class="campo-admin">
+                    <label for="evento-dia">Día *</label>
+                    <input type="number" id="evento-dia" placeholder="25" min="1" max="31" required>
+                </div>
+                <div class="campo-admin">
+                    <label for="evento-mes">Mes *</label>
+                    <input type="text" id="evento-mes" placeholder="Ago" required>
+                </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                <div class="campo-admin">
+                    <label for="evento-hora">Hora *</label>
+                    <input type="text" id="evento-hora" placeholder="6:00 PM" required>
+                </div>
+                <div class="campo-admin">
+                    <label for="evento-lugar">Ubicación *</label>
+                    <input type="text" id="evento-lugar" placeholder="Salón Principal" required>
+                </div>
+            </div>
+            <div class="campo-admin">
+                <label for="evento-categoria">Categoría *</label>
+                <select id="evento-categoria" required>
+                    <option value="">Selecciona...</option>
+                    <option>Jóvenes</option>
+                    <option>Niños</option>
+                    <option>Matrimonios</option>
+                    <option>Damas</option>
+                    <option>Caballeros</option>
+                    <option>Alabanza</option>
+                    <option>Misiones</option>
+                    <option>General</option>
+                </select>
+            </div>
+            <div class="campo-admin">
+                <label for="evento-imagen-url">Imagen del evento</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="evento-imagen-url" placeholder="URL de la imagen" style="flex:1;">
+                    <button type="button" onclick="subirImagenEvento()" style="background:#c9af1e; color:#7e0000; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; white-space:nowrap;">
+                        <i class="fas fa-cloud-upload-alt"></i> Subir
+                    </button>
+                </div>
+                <small id="preview-imagen" style="display:block; margin-top:8px;"></small>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button onclick="guardarEvento()" style="background:#7e0000; color:white; border:none; padding:12px 25px; border-radius:30px; cursor:pointer; font-weight:600; flex:1;">
+                    <i class="fas fa-save"></i> Guardar evento
+                </button>
+                <button onclick="cancelarEdicion()" id="btn-cancelar" style="background:#f0ede6; color:#7e0000; border:none; padding:12px 25px; border-radius:30px; cursor:pointer; font-weight:600; display:none;">
+                    Cancelar
+                </button>
+            </div>
+            <div id="mensaje-validacion" style="color:red; margin-top:10px; display:none;"></div>
+        </div>
+
+        <!-- Lista de eventos -->
+        <h4 style="color:#7e0000; margin-bottom:15px;">Eventos existentes</h4>
+        <div id="lista-eventos-admin" style="display:flex; flex-direction:column; gap:10px;"></div>
+
+        <!-- Formulario de foto galería -->
+        <h4 style="color:#7e0000; margin:30px 0 15px;">Galería de fotos</h4>
+        <div style="background:white; border-radius:16px; padding:20px; box-shadow:0 4px 15px rgba(0,0,0,0.05); margin-bottom:20px;">
+            <div class="campo-admin">
+                <label for="foto-url">URL de la foto</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="foto-url" placeholder="URL de la imagen" style="flex:1;">
+                    <button type="button" onclick="subirImagenGaleria()" style="background:#c9af1e; color:#7e0000; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; white-space:nowrap;">
+                        <i class="fas fa-cloud-upload-alt"></i> Subir
+                    </button>
+                </div>
+            </div>
+            <div class="campo-admin">
+                <label for="foto-descripcion">Descripción</label>
+                <input type="text" id="foto-descripcion" placeholder="Ej: Retiro de jóvenes 2025">
+            </div>
+            <button onclick="agregarFoto()" style="background:#7e0000; color:white; border:none; padding:10px 20px; border-radius:30px; cursor:pointer; font-weight:600; width:100%;">
+                <i class="fas fa-image"></i> Agregar foto
+            </button>
+        </div>
+        <div id="lista-fotos-admin" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px;"></div>
+    </div>
+</div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <!-- SDKs de Supabase y Cloudinary -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    <!-- Script principal -->
+    <script src="script.js"></script>
+</body>
+
+</html>
